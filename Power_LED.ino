@@ -16,22 +16,39 @@ void setup()
     digitalWrite(GPIO_BLUE, LOW);
 }
 
+void ramp(int pin, int start, int stop, int wait)
+{
+  if (stop > start)
+    for (int value=start; value<=stop; value++)
+    {
+      analogWrite(pin, value);
+      delay(wait);
+    }
+  else
+    for (int value=start; value>=stop; value--)
+    {
+      analogWrite(pin, value);
+      delay(wait);
+    }
+}
+
 void loop()
 {
   digitalWrite(GPIO_POWER, HIGH);
   delay(200);
 
-  analogWrite(GPIO_RED, 10);
-  delay(1000);
+  ramp(GPIO_RED, 0, 255, 10);
+  delay(500);
+  ramp(GPIO_RED, 255, 0, 10);
   digitalWrite(GPIO_RED, LOW);
  
-  analogWrite(GPIO_GREEN, 10);
-  delay(1000);
-  digitalWrite(GPIO_GREEN, LOW);
+  ramp(GPIO_GREEN, 0, 255, 10);
+  delay(500);
+  ramp(GPIO_GREEN, 255, 0, 10);
  
-  analogWrite(GPIO_BLUE, 10);
-  delay(1000);
-  digitalWrite(GPIO_BLUE, LOW);
+  ramp(GPIO_BLUE, 0, 255, 10);
+  delay(500);
+  ramp(GPIO_BLUE, 255, 0, 10);
   
   digitalWrite(GPIO_POWER, LOW);
   delay(2000);
