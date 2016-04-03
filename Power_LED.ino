@@ -4,6 +4,8 @@
 #define GPIO_BLUE 11
 #define GPIO_POWER 10
 
+int BaumhausGruen[] = {17,107,4};
+
 void setup()
 {
     pinMode(GPIO_POWER, OUTPUT);
@@ -32,11 +34,38 @@ void ramp(int pin, int start, int stop, int wait)
     }
 }
 
+void ramp_rgb(
+  int start_red, int stop_red,
+  int start_green, int stop_green,
+  int start_blue, int stop_blue,
+  int wait)
+{
+  int steps = 100;
+  float step_red   = (stop_red - start_red) / steps;
+  float step_green = (stop_red - start_red) / steps;
+  float step_blue  = (stop_blue - start_blue) / steps;
+
+  for (int i=0; i<=100; i++)
+  {
+    analogWrite(GPIO_RED,   round(start_red + i*step_red));
+    analogWrite(GPIO_GREEN, round(start_red + i*step_green));
+    analogWrite(GPIO_BLUE,  round(start_red + i*step_blue));
+    delay(wait);
+  }
+}
+
 void loop()
 {
   digitalWrite(GPIO_POWER, HIGH);
   delay(200);
 
+  //ramp_rgb(0, BaumhausGruen[0], 0, BaumhausGruen[1], 0, BaumhausGruen[2], 10);
+/*  ramp(GPIO_RED, 0, BaumhausGruen[0], 1);
+  ramp(GPIO_GREEN, 0, BaumhausGruen[1], 1);
+  ramp(GPIO_BLUE, 0, BaumhausGruen[2], 1);
+  delay(5000);
+  */
+  
   ramp(GPIO_RED, 0, 255, 10);
   delay(500);
   ramp(GPIO_GREEN, 0, 255, 10);
