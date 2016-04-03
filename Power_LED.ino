@@ -39,16 +39,20 @@ void loop()
 
   ramp(GPIO_RED, 0, 255, 10);
   delay(500);
-  ramp(GPIO_RED, 255, 0, 10);
-  digitalWrite(GPIO_RED, LOW);
- 
   ramp(GPIO_GREEN, 0, 255, 10);
   delay(500);
-  ramp(GPIO_GREEN, 255, 0, 10);
- 
-  ramp(GPIO_BLUE, 0, 255, 10);
+  ramp(GPIO_RED, 255, 0, 10);
+  delay(500); 
+  ramp(GPIO_BLUE, 0, 255, 20);
+  delay(500);
+  ramp(GPIO_RED, 0, 255, 10);
+  delay(500);
+  ramp(GPIO_GREEN, 255, 0, 8);
   delay(500);
   ramp(GPIO_BLUE, 255, 0, 10);
+  delay(500);
+  ramp(GPIO_RED, 255, 0, 8);
+  delay(500);
   
   digitalWrite(GPIO_POWER, LOW);
   delay(2000);
